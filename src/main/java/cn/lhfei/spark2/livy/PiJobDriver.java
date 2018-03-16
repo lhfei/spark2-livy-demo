@@ -27,7 +27,7 @@ public class PiJobDriver {
 		try {
 			for(String s : System.getProperty("java.class.path").split(File.pathSeparator)) {
 				LOGGER.info("jar file: {}", s);
-				if(new File(s).getName().startsWith("spark2-livy-demo")) {
+				if(new File(s).getName().startsWith("spark-examples")) {
 					client.uploadJar(new File(s)).get();
 					
 					break;

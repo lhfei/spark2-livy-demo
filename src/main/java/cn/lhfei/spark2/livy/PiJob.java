@@ -11,7 +11,7 @@ import org.apache.spark.api.java.function.Function2;
 public class PiJob implements Job<Double>, Function<Integer, Integer>, Function2<Integer, Integer, Integer> {
 	private static final long serialVersionUID = -7787627046604633208L;
 
-	private int samples = 0;
+	private int samples = 5;
 
 	public PiJob(int samples) {
 		this.samples = samples;
