@@ -35,7 +35,7 @@ public class PiJobDriver {
 		props.put("livy.superusers", "zeppelin-pss_cloud_dev");
 		
 
-		LivyClient client = new LivyClientBuilder().setURI(new URI(args[0])).build();
+		LivyClient client = new LivyClientBuilder().setAll(props).setURI(new URI(args[0])).build();
 		
 		LOGGER.info("Uploading spark2-livy-demo jar to the SparkContext ...");
 		try {
