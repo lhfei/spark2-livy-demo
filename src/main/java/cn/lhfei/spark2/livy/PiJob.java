@@ -7,9 +7,13 @@ import org.apache.livy.Job;
 import org.apache.livy.JobContext;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.Function2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PiJob implements Job<Double>, Function<Integer, Integer>, Function2<Integer, Integer, Integer> {
 	private static final long serialVersionUID = -7787627046604633208L;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(PiJob.class);
 
 	private int samples = 5;
 
@@ -33,6 +37,7 @@ public class PiJob implements Job<Double>, Function<Integer, Integer>, Function2
 	@Override
 	public Double call(JobContext context) throws Exception {
 		List<Integer> sampleList = new ArrayList<>();
+		LOGGER.info("Argument [samples] value is: {}", samples);
 		for (int i = 0; i < samples; i++) {
 			sampleList.add(i + 1);
 		}
