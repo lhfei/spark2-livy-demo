@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.livy.LivyClient;
@@ -20,6 +21,19 @@ public class PiJobDriver {
 
 			System.exit(-1);
 		}
+		
+		Properties props = new Properties();
+		props.put("livy.impersonation.enabled", "true");
+		props.put("livy.server.auth.kerberos.keytab", "/etc/security/keytabs/spnego.service.keytab");
+		props.put("livy.server.auth.kerberos.principal", "HTTP/_HOST@POLARIS.JD.COM");
+		props.put("livy.server.auth.type", "kerberos");
+		props.put("livy.server.csrf_protection.enabled", "true");
+		props.put("livy.server.kerberos.keytab", "/etc/security/keytabs/livy.service.keytab");
+		props.put("livy.server.kerberos.principal", "livy/_HOST@POLARIS.JD.COM");
+		props.put("livy.server.port", "8999");
+		props.put("livy.server.session.timeout", "3600000");
+		props.put("livy.superusers", "zeppelin-pss_cloud_dev");
+		
 
 		LivyClient client = new LivyClientBuilder().setURI(new URI(args[0])).build();
 		
